@@ -4,61 +4,80 @@ LICENCIA DE USO DE YAPA
 Copyright (c) 2026 ederdev. Todos los derechos reservados.
 
 "yapa" (el "Software") se distribuye en forma compilada (paquetes, imágenes y archivos de instalación) para uso
-gratuito. El código fuente NO se concede ni se publica. Al instalar o usar el Software aceptas estos términos.
+gratuito y con libertad de comercialización por terceros (sección 2). El código fuente NO se concede ni se publica.
+Al instalar o usar el Software aceptas estos términos.
 
 1. USO PERMITIDO
    Puedes instalar y usar el Software, sin costo y sin límite de tiempo, en tus propios equipos o servidores, para
-   operar tu negocio o el de tus clientes, incluido uso comercial. Puedes hacer copias de seguridad y copiar el
-   Software entre tus propios equipos.
+   operar tu negocio, incluido uso comercial. Puedes hacer copias de seguridad y copiar el Software entre tus propios
+   equipos.
 
-2. LO QUE NO ESTÁ PERMITIDO
-   a) Vender, alquilar, sublicenciar o redistribuir el Software o sus paquetes a terceros, ya sea solo o como parte
-      de otro producto, sin autorización escrita del titular.
-   b) Ofrecer el Software como servicio alojado a terceros (por ejemplo, una versión en la nube para vender a
-      otros) sin autorización escrita del titular.
-   c) Descompilar, desensamblar, aplicar ingeniería inversa o intentar obtener el código fuente, salvo en la medida
+2. REVENDEDORES Y PROVEEDORES DE SERVICIO (LIBERTAD DE COMERCIALIZACIÓN)
+   Cualquier persona o empresa puede, SIN pedir permiso y SIN pagar regalías al titular:
+   a) instalar y configurar el Software para sus clientes, en servidores del cliente o propios;
+   b) alojar el Software (hosting, nube, SaaS) para sus clientes y cobrarles por ese servicio;
+   c) cobrar a sus clientes por el uso, la suscripción o el acceso a yapa, y por implementación, capacitación,
+      soporte, migración y personalización de datos y configuración;
+   d) entregar a sus clientes los paquetes oficiales de instalación, sin modificar.
+   Condiciones:
+   i)   Usar únicamente versiones oficiales del Software, sin modificarlas.
+   ii)  Mantener visibles el nombre "yapa", los avisos de derechos de autor y esta licencia, y entregar una copia de
+        esta licencia a cada cliente.
+   iii) No presentarse como autor o titular del Software, ni afirmar que cuenta con respaldo oficial del titular
+        salvo autorización escrita. Sí puede decir que "ofrece", "implementa" o "aloja" yapa.
+   iv)  El revendedor es el único responsable ante sus clientes (soporte, disponibilidad, copias de seguridad,
+        garantías y datos). El titular no asume obligación alguna frente a los clientes del revendedor.
+   v)   Esta sección no transfiere propiedad, código fuente ni el derecho de cambiar la marca (marca blanca), que
+        requieren autorización escrita del titular.
+
+3. LO QUE NO ESTÁ PERMITIDO
+   a) Modificar el Software, crear obras derivadas o distribuir versiones alteradas.
+   b) Descompilar, desensamblar, aplicar ingeniería inversa o intentar obtener el código fuente, salvo en la medida
       en que la ley aplicable lo permita expresamente aunque este contrato lo prohíba.
-   d) Eliminar o alterar los avisos de derechos de autor o de licencia.
+   c) Vender o publicar el código fuente, o sublicenciar derechos sobre él.
+   d) Eliminar o alterar los avisos de derechos de autor, el nombre o esta licencia.
    e) Usar el Software para actividades ilegales.
 
-3. TUS DATOS
+4. TUS DATOS
    Todos los datos que registres (ventas, clientes, comprobantes, etc.) son tuyos y permanecen en tu servidor. El
    titular no accede a ellos ni los recibe por el solo uso del Software. Eres responsable de tus copias de seguridad
-   y de la custodia de tus claves (por ejemplo, SIGNING_MASTER_KEY).
+   y de la custodia de tus claves (por ejemplo, SIGNING_MASTER_KEY). Un revendedor que aloje datos de terceros es
+   responsable de su custodia.
 
-4. SERVICIOS DE TERCEROS
+5. SERVICIOS DE TERCEROS
    El Software puede conectarse a servicios externos que tú configures (por ejemplo FiscalEngine para facturación
    electrónica, SUNAT, correo, proveedores de pago). Esos servicios tienen sus propios términos y costos, ajenos al
    titular.
 
-5. RESPONSABILIDAD TRIBUTARIA
+6. RESPONSABILIDAD TRIBUTARIA
    El Software es una herramienta de gestión. Eres el único responsable de la veracidad de la información, de la
    emisión y envío de tus comprobantes, de tus declaraciones y del cumplimiento de tus obligaciones tributarias y
    legales. Consulta a tu contador.
 
-6. SIN GARANTÍA
+7. SIN GARANTÍA
    EL SOFTWARE SE ENTREGA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O IMPLÍCITA, INCLUIDAS LAS DE COMERCIABILIDAD,
    IDONEIDAD PARA UN FIN PARTICULAR Y NO INFRACCIÓN. EL TITULAR NO ASEGURA QUE EL SOFTWARE SEA ININTERRUMPIDO NI LIBRE
    DE ERRORES.
 
-7. LIMITACIÓN DE RESPONSABILIDAD
+8. LIMITACIÓN DE RESPONSABILIDAD
    EN LA MÁXIMA MEDIDA PERMITIDA POR LA LEY, EL TITULAR NO SERÁ RESPONSABLE POR DAÑOS INDIRECTOS, PÉRDIDA DE DATOS,
    LUCRO CESANTE, SANCIONES O MULTAS DERIVADAS DEL USO O LA IMPOSIBILIDAD DE USO DEL SOFTWARE.
 
-8. COMPONENTES DE TERCEROS
+9. COMPONENTES DE TERCEROS
    El Software incluye componentes de terceros, cada uno bajo su propia licencia, que prevalece sobre estos términos
    para ese componente. Ver THIRD-PARTY-NOTICES.md.
 
-9. TERMINACIÓN
-   Esta licencia termina automáticamente si incumples estos términos. Al terminar, debes dejar de usar el Software y
-   eliminar las copias que no sean tus respaldos de datos.
+10. TERMINACIÓN
+    Esta licencia termina automáticamente si incumples estos términos. Al terminar, debes dejar de usar el Software y
+    eliminar las copias que no sean tus respaldos de datos.
 
-10. LEY APLICABLE
+11. LEY APLICABLE
     Estos términos se rigen por las leyes de la República del Perú.
 
-Contacto del titular: ederdev (ver el repositorio público de distribución: https://github.com/ederaira/yapa-releases).
+Contacto del titular: ederdev (https://github.com/ederaira/yapa-releases).
 
 ---
-English summary (the Spanish text above prevails): yapa is free to install and use, including commercially, but it is
-closed-source. You may not redistribute, resell, offer it as a hosted service to others, or reverse engineer it.
-Provided "as is" without warranty.
+English summary (the Spanish text above prevails): yapa is free to use. Resellers may install it, host it for their
+clients and charge for hosting, subscriptions, support and services without asking permission or paying royalties,
+as long as they use unmodified official builds, keep the yapa name and notices, and do not claim to be the author.
+It is closed-source: no modification, reverse engineering or source redistribution. Provided "as is" without warranty.
