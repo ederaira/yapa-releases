@@ -4,7 +4,7 @@ LICENCIA DE USO DE YAPA
 Copyright (c) 2026 ederdev. Todos los derechos reservados.
 
 "yapa" (el "Software") se distribuye en forma compilada (paquetes, imágenes y archivos de instalación) para uso
-gratuito y con libertad de comercialización por terceros (sección 2). El código fuente NO se concede ni se publica.
+gratuito, y permite a terceros ofrecerlo como servicio alojado (sección 2). El código fuente NO se concede ni se publica.
 Al instalar o usar el Software aceptas estos términos.
 
 1. USO PERMITIDO
@@ -12,13 +12,11 @@ Al instalar o usar el Software aceptas estos términos.
    operar tu negocio, incluido uso comercial. Puedes hacer copias de seguridad y copiar el Software entre tus propios
    equipos.
 
-2. REVENDEDORES Y PROVEEDORES DE SERVICIO (LIBERTAD DE COMERCIALIZACIÓN)
-   Cualquier persona o empresa puede, SIN pedir permiso y SIN pagar regalías al titular:
-   a) instalar y configurar el Software para sus clientes, en servidores del cliente o propios;
-   b) alojar el Software (hosting, nube, SaaS) para sus clientes y cobrarles por ese servicio;
-   c) cobrar a sus clientes por el uso, la suscripción o el acceso a yapa, y por implementación, capacitación,
-      soporte, migración y personalización de datos y configuración;
-   d) entregar a sus clientes los paquetes oficiales de instalación, sin modificar.
+2. SERVICIO ALOJADO PARA CLIENTES (HOSTING)
+   Cualquier persona o empresa puede, SIN pedir permiso y SIN pagar regalías al titular, instalar el Software en su
+   propio servidor y ofrecer a sus clientes el uso de yapa como SERVICIO ALOJADO (hosting, nube, SaaS), cobrándoles
+   por ese servicio, incluido el soporte, la implementación, la capacitación y la migración de datos. Los clientes
+   usan yapa a través del servidor del proveedor; no reciben copias del Software.
    Condiciones:
    i)   Usar únicamente versiones oficiales del Software, sin modificarlas.
    ii)  Mantener visibles el nombre "yapa", los avisos de derechos de autor y esta licencia, y entregar una copia de
@@ -32,6 +30,8 @@ Al instalar o usar el Software aceptas estos términos.
 
 3. LO QUE NO ESTÁ PERMITIDO
    a) Modificar el Software, crear obras derivadas o distribuir versiones alteradas.
+   a-bis) Vender, alquilar o redistribuir copias, paquetes o instaladores del Software como producto, sin
+      autorización escrita del titular. Alojarlo como servicio (sección 2) no es redistribuirlo.
    b) Descompilar, desensamblar, aplicar ingeniería inversa o intentar obtener el código fuente, salvo en la medida
       en que la ley aplicable lo permita expresamente aunque este contrato lo prohíba.
    c) Vender o publicar el código fuente, o sublicenciar derechos sobre él.
@@ -77,7 +77,8 @@ Al instalar o usar el Software aceptas estos términos.
 Contacto del titular: ederdev (https://github.com/ederaira/yapa-releases).
 
 ---
-English summary (the Spanish text above prevails): yapa is free to use. Resellers may install it, host it for their
-clients and charge for hosting, subscriptions, support and services without asking permission or paying royalties,
+English summary (the Spanish text above prevails): yapa is free to use. Anyone may install it on their own server and
+offer it to their clients as a hosted service, charging for that service, without asking permission or paying royalties,
 as long as they use unmodified official builds, keep the yapa name and notices, and do not claim to be the author.
-It is closed-source: no modification, reverse engineering or source redistribution. Provided "as is" without warranty.
+Selling or redistributing copies of the software is not permitted. It is closed-source: no modification, reverse
+engineering or source redistribution. Provided "as is" without warranty.

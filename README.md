@@ -38,17 +38,18 @@ activadas, el instalador envía una boleta al ambiente **beta** de SUNAT (a trav
 
 Abre un [issue](../../issues) para reportar un problema o sugerir algo. Antes de instalar, `./yapa.sh doctor` te dice qué falta.
 
-## ¿Eres revendedor o consultor?
+## ¿Quieres ofrecer yapa como servicio a tus clientes?
 
-**Puedes vender yapa.** Sin pedir permiso y sin pagar regalías puedes instalarlo para tus clientes, alojarlo en tu VPS
-(hosting o SaaS) y cobrar por el acceso, la suscripción, la implementación, la capacitación y el soporte.
-Condiciones: usar las versiones oficiales sin modificar, mantener el nombre yapa y la licencia, y no presentarte como
-su autor. Detalle en la sección 2 de la [licencia](LICENSE). Para alojar varias empresas en un mismo servidor, mira la
+**Puedes.** Sin pedir permiso y sin pagar regalías puedes instalar yapa en **tu propio servidor** y ofrecérselo a tus
+clientes como **servicio alojado** (hosting o "yapa en la nube"), cobrando por el servicio, el soporte, la
+implementación y la capacitación. Condiciones: usar las versiones oficiales sin modificar, mantener el nombre yapa y la
+licencia, y no presentarte como su autor. **No** se permite vender ni redistribuir copias o instaladores. Detalle en la
+sección 2 de la [licencia](LICENSE). Para alojar varias empresas en un mismo servidor, mira la
 [edición Servidor](docs/EDICIONES.md).
 
 ## Licencia
 
-yapa es **gratuito para usar** (incluido uso comercial) y **libre de revender** (sección anterior), pero **no es de
+yapa es **gratuito para usar** (incluido uso comercial) y se puede **ofrecer como servicio alojado** (sección anterior), pero **no es de
 código abierto**: no se permite modificarlo, descompilarlo ni publicar su código. Ver [LICENSE](LICENSE). Componentes de terceros:
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
 
