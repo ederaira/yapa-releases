@@ -14,8 +14,11 @@ equipo o servidor con **un comando** y deja lista una **empresa de demostración
 
 ```bash
 ./yapa.sh doctor     # revisa tu equipo (opcional, recomendado)
-./yapa.sh install    # instala y muestra tus usuarios y contraseñas
+./yapa.sh install    # edición LITE (por defecto): una empresa + demostración
 ```
+
+¿Quieres **varias empresas** (edición **Servidor**, con panel de operador)? Instala así:
+`YAPA_EDITION=server ./yapa.sh install`. Si no indicas nada, se instala Lite. Guía: [docs/EDICIONES.md](docs/EDICIONES.md).
 
 Funciona en **Windows (Docker Desktop + WSL2)**, **macOS**, **Linux** y **VPS** (con HTTPS automático si tienes dominio).
 Imagen para amd64 y arm64 (también Raspberry Pi / Oracle Ampere).
