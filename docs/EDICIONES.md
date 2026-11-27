@@ -67,25 +67,68 @@ Detalle en [INSTALAR.md](INSTALAR.md).
 
 ## Instalar la edición Servidor
 
-Usa el mismo paquete (`yapa-docker-<versión>.zip`) y cambia la configuración **antes del primer arranque**.
-Ejecuta `./yapa.sh install` solo si quieres la demo; para Servidor escribe tú el `.env`:
+Usa el mismo paquete (`yapa-docker-<versión>.zip`). El asistente instala **Lite** por defecto; con `YAPA_EDITION=server`
+instala **Servidor** directamente: genera el `.env` con todas las claves, levanta yapa y, si das un dominio, publica
+también el panel del operador.
 
 ```bash
-cd yapa-docker
-cat > .env <<'EOF'
-SPRING_PROFILES_ACTIVE=server          # <- esto activa la edición Servidor
-YAPA_PUBLIC_URL=https://erp.midominio.pe
-YAPA_DOMAIN=erp.midominio.pe           # HTTPS automático (opcional)
-DB_PASSWORD=<contraseña-larga>
-SIGNING_MASTER_KEY=<openssl rand -base64 32>
-YAPA_STORAGE_SIGNING_SECRET=<openssl rand -base64 32>
-YAPA_INTERNAL_SECRET=<openssl rand -base64 32>
-YAPA_AUTH_PROVIDER=builtin             # o keycloak (ver CONFIGURACION.md)
-YAPA_OPERATOR_USERNAME=operador        # operador de plataforma
-YAPA_OPERATOR_PASSWORD=<contraseña-larga>
-EOF
-docker compose --profile https up -d
+unzip yapa-docker-<versión>.zip && cd yapa-docker
+YAPA_EDITION=server ./yapa.sh install
 ```
+
+Pregunta solo el dominio principal (vacío = sin HTTPS, para pruebas) y el dominio del panel del operador
+(por defecto `admin.<dominio>`). No crea empresa propia ni demo: al terminar muestra el usuario y la clave del
+**operador de plataforma**, que da de alta las empresas desde el panel (abajo). Escribe en `YAPA_CORS_ALLOWED_ORIGINS` los
+dos dominios, y `./yapa.sh admin-panel` pide además el usuario y la clave de Basic Auth del panel.
+
+### Instalación manual (alternativa)
+
+Si prefieres escribir el `.env` tú, hazlo **antes del primer arranque** y arranca con `./yapa.sh start`. No ejecutes
+`./yapa.sh install` sobre ese `.env`: lo sobrescribiría.
+
+Requisitos previos: Docker con Compose v2, `openssl`, y el DNS de tu dominio (y del subdominio del operador, si lo
+usarás) apuntando ya al servidor, con los puertos 80 y 443 abiertos.
+
+```bash
+unzip yapa-docker-<versión>.zip && cd yapa-docker
+chmod +x yapa.sh seed-demo.sh
+
+DOMINIO=erp.midominio.pe          # dominio del panel de las empresas
+ADMIN=admin.midominio.pe          # subdominio del panel del operador (lo publicas después)
+
+umask 077
+cat > .env <<EOF
+SPRING_PROFILES_ACTIVE=server
+YAPA_PUBLIC_URL=https://$DOMINIO
+YAPA_DOMAIN=$DOMINIO
+YAPA_AUTH_PROVIDER=builtin
+YAPA_CORS_ALLOWED_ORIGINS=https://$DOMINIO,https://$ADMIN
+DB_PASSWORD=$(openssl rand -hex 24)
+SIGNING_MASTER_KEY='$(openssl rand -base64 32)'
+YAPA_STORAGE_SIGNING_SECRET=$(openssl rand -hex 32)
+YAPA_INTERNAL_SECRET=$(openssl rand -hex 32)
+YAPA_OPERATOR_USERNAME=operador
+YAPA_OPERATOR_PASSWORD=$(openssl rand -hex 16)
+EOF
+
+./yapa.sh start          # levanta PostgreSQL, la aplicación y HTTPS (Caddy)
+./yapa.sh status         # espera a que app diga (healthy)
+grep -E 'YAPA_OPERATOR|SIGNING_MASTER_KEY' .env     # anota la clave del operador y guarda una copia de la llave
+```
+
+Notas importantes:
+
+- **`SIGNING_MASTER_KEY`:** guarda una copia fuera del servidor. Sin ella no se pueden leer los certificados ni las
+  credenciales cifradas.
+- **`YAPA_CORS_ALLOWED_ORIGINS`:** debe listar **cada** dominio desde el que se abre un panel (el principal y el del
+  operador). Sin él, el inicio de sesión responde `403` (ver [INSTALAR.md](INSTALAR.md)).
+- **Aplicar cambios del `.env`:** usa `./yapa.sh start`, no `restart` (este no relee el `.env`).
+- **Sin demostración:** esta instalación no crea la empresa demo ni una empresa propia. Las empresas las das de alta con
+  el operador (abajo). Si quieres la demo, añade `YAPA_DEMO_ENABLED=true` y ejecuta `./yapa.sh seed-demo`.
+- **Sin dominio / solo pruebas:** deja `YAPA_DOMAIN` vacío y usa `YAPA_PUBLIC_URL=http://localhost:8080`. No hay HTTPS ni
+  panel del operador en dominio propio; el alta de empresas se hace por API.
+- **Pasar de Lite a Servidor con datos existentes:** no cambies el `.env` a mano; usa el procedimiento de respaldo de
+  la sección "Pasar de Lite a Servidor".
 
 ### Panel del operador (recomendado)
 

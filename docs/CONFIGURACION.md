@@ -78,7 +78,7 @@ Keycloak). Un usuario se bloquea 15 minutos tras 5 intentos fallidos.
 | Variable | Qué hace | Por defecto |
 |---|---|---|
 | `YAPA_WEB_DIR` | Carpeta del panel web compilado. La imagen Docker ya lo trae (`/app/web`). Vacío = solo API | — |
-| `YAPA_CORS_ALLOWED_ORIGINS` | Orígenes (separados por coma) de un panel servido desde **otro** dominio. Vacío = mismo origen | — |
+| `YAPA_CORS_ALLOWED_ORIGINS` | Orígenes (separados por coma) desde los que se abre un panel: con dominio y HTTPS, el principal **y** el del operador (`https://erp.midominio.pe,https://admin.midominio.pe`). Si falta, el login responde 403 `Invalid CORS request`. Vacío = solo mismo origen | — |
 | `SELF_URL` | Dirección con la que yapa se llama a sí misma | `http://localhost:8080` |
 | `YAPA_PLATFORM_WEB_DIR` | Carpeta del panel del operador compilado. La imagen Docker ya lo trae (`/app/platform-web`) y lo sirve bajo `/_platform/` | — |
 

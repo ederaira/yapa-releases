@@ -65,8 +65,14 @@ Abre solo los puertos **80 y 443** en el firewall del proveedor (el puerto 8080 
 ### Si el inicio de sesión responde 403 con un dominio
 
 Con HTTPS, el navegador envía `https://tu-dominio` y la aplicación puede verlo como otro origen: el login responde
-`403` (`Invalid CORS request`). Añade a `.env` `YAPA_CORS_ALLOWED_ORIGINS=https://tu-dominio` y aplica con
-`./yapa.sh start`.
+`403` con el texto `Invalid CORS request` (cuerpo de 20 bytes en la pestaña Red del navegador). Pasa en cada dominio
+desde el que abras un panel, incluido el del operador (`admin.tu-dominio`). Las instalaciones hechas con una versión
+reciente del asistente, y `./yapa.sh admin-panel`, ya lo escriben solos; si instalaste con una versión anterior, la solución es: lista **todos** los orígenes en
+`.env`, separados por coma, y aplica con `./yapa.sh start`:
+
+```bash
+YAPA_CORS_ALLOWED_ORIGINS=https://erp.midominio.pe,https://admin.midominio.pe
+```
 
 > **`restart` no relee el `.env`.** Después de cambiar el `.env` usa `./yapa.sh start` (recrea los contenedores
 > cambiados). `./yapa.sh restart` solo reinicia los que ya existen con su configuración anterior.
