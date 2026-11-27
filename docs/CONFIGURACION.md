@@ -80,6 +80,22 @@ Keycloak). Un usuario se bloquea 15 minutos tras 5 intentos fallidos.
 | `YAPA_WEB_DIR` | Carpeta del panel web compilado. La imagen Docker ya lo trae (`/app/web`). Vacío = solo API | — |
 | `YAPA_CORS_ALLOWED_ORIGINS` | Orígenes (separados por coma) de un panel servido desde **otro** dominio. Vacío = mismo origen | — |
 | `SELF_URL` | Dirección con la que yapa se llama a sí misma | `http://localhost:8080` |
+| `YAPA_PLATFORM_WEB_DIR` | Carpeta del panel del operador compilado. La imagen Docker ya lo trae (`/app/platform-web`) y lo sirve bajo `/_platform/` | — |
+
+### Panel del operador en un dominio propio (edición Servidor)
+
+Lo activa `./yapa.sh admin-panel` (requiere `YAPA_DOMAIN` y que el DNS del subdominio ya apunte al servidor). Estas
+variables viven en el `.env`; el comando las escribe por ti y puedes cambiarlas después:
+
+| Variable | Qué hace | Por defecto |
+|---|---|---|
+| `YAPA_ADMIN_DOMAIN` | Dominio del panel del operador, por ejemplo `admin.midominio.pe`. Sin este dominio no se publica | — |
+| `YAPA_ADMIN_BASIC_USER` | Usuario de la Basic Auth que protege el panel | `admin` |
+| `YAPA_ADMIN_BASIC_HASH` | Hash bcrypt de la clave de Basic Auth (se genera con `./yapa.sh admin-panel`) | — |
+
+El hash lleva `$`: escríbelo **entre comillas simples** en el `.env`. Basic Auth protege solo la página del panel; las
+llamadas a la API llevan su propio token y no pasan por ella. Después de Basic Auth, el operador inicia sesión con
+`YAPA_OPERATOR_USERNAME` / `YAPA_OPERATOR_PASSWORD`.
 
 ## 7. Correo (envío de comprobantes por email)
 

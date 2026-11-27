@@ -34,7 +34,8 @@ varias empresas aisladas entre sí, usa **Servidor**.
 | Estado de pruebas | Probada de punta a punta con el instalador | Probada por componentes en desarrollo |
 
 > Honestidad primero: el asistente instala **Lite**. La edición Servidor funciona, pero su instalación todavía es
-> manual y su panel de operador no viene empaquetado en la Release (el alta de empresas se hace por API).
+> manual. El panel del operador (alta de empresas) viene en la imagen y se publica con `./yapa.sh admin-panel`
+> (ver abajo); el alta por API sigue disponible.
 
 ## ¿Dónde puedo instalarlo?
 
@@ -86,7 +87,22 @@ EOF
 docker compose --profile https up -d
 ```
 
-Después, el operador da de alta cada empresa:
+### Panel del operador (recomendado)
+
+Para dar de alta empresas desde la web, publica el panel en un subdominio propio, protegido con Basic Auth:
+
+```bash
+# 1. DNS: registro A de admin.midominio.pe hacia la IP del servidor.
+# 2. En la carpeta de yapa:
+./yapa.sh admin-panel      # pide dominio, usuario y clave de Basic Auth (o la genera)
+```
+
+Entra a `https://admin.midominio.pe`, pasa la Basic Auth y luego inicia sesión con el operador
+(`YAPA_OPERATOR_USERNAME` / `YAPA_OPERATOR_PASSWORD` del `.env`). Requiere `YAPA_DOMAIN` (HTTPS) y la edición Servidor.
+
+### Alta de empresas por API
+
+Alternativa sin panel:
 
 ```bash
 TOKEN=$(curl -s -X POST https://erp.midominio.pe/realms/master/protocol/openid-connect/token \

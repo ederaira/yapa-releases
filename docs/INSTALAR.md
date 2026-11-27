@@ -49,6 +49,31 @@ Igual que Linux. Cuando el asistente pregunte por el **dominio**, escríbelo (po
 levanta HTTPS automático con Let's Encrypt. El DNS del dominio debe apuntar ya a la IP del servidor y los puertos
 80 y 443 estar abiertos.
 
+Para un VPS nuevo (Ubuntu 24.04 LTS recomendado; sirve amd64 y arm64):
+
+```bash
+curl -fsSL https://get.docker.com | sh
+apt-get install -y openssl unzip curl
+VER=$(curl -s https://api.github.com/repos/ederaira/yapa-releases/releases/latest | grep -oP '"tag_name": "v\K[^"]+')
+curl -LO https://github.com/ederaira/yapa-releases/releases/download/v$VER/yapa-docker-$VER.zip
+unzip yapa-docker-$VER.zip && cd yapa-docker-$VER
+./yapa.sh doctor && ./yapa.sh install
+```
+
+Abre solo los puertos **80 y 443** en el firewall del proveedor (el puerto 8080 de la aplicación no debe quedar expuesto).
+
+### Si el inicio de sesión responde 403 con un dominio
+
+Con HTTPS, el navegador envía `https://tu-dominio` y la aplicación puede verlo como otro origen: el login responde
+`403` (`Invalid CORS request`). Añade a `.env` `YAPA_CORS_ALLOWED_ORIGINS=https://tu-dominio` y aplica con
+`./yapa.sh start`.
+
+> **`restart` no relee el `.env`.** Después de cambiar el `.env` usa `./yapa.sh start` (recrea los contenedores
+> cambiados). `./yapa.sh restart` solo reinicia los que ya existen con su configuración anterior.
+
+> **`./yapa.sh update` solo actualiza la imagen**, no `docker-compose.yml`, `Caddyfile` ni `yapa.sh`. Si una versión
+> nueva cambia esos archivos (lo dirá en sus notas), reemplázalos con los del `.zip` nuevo.
+
 ## Uso diario
 
 ```bash
@@ -58,6 +83,7 @@ levanta HTTPS automático con Let's Encrypt. El DNS del dominio debe apuntar ya 
 ./yapa.sh backup                 # respaldo de la base de datos y los archivos
 ./yapa.sh restore backups/<carpeta>
 ./yapa.sh update                 # actualizar a la última versión
+./yapa.sh admin-panel            # (Servidor) publicar el panel del operador en admin.<tu-dominio>
 ./yapa.sh stop | start | restart
 ```
 
