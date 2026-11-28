@@ -158,6 +158,27 @@ curl -X POST https://erp.midominio.pe/api/v1/tenants -H "Authorization: Bearer $
 Al primer arranque yapa crea una empresa técnica llamada `bootstrap` (puedes ignorarla). Cada empresa que des de alta recibe su propia base de datos. Sus usuarios entran con el slug de su empresa en el login.
 Para Keycloak, MinIO y todos los demás parámetros, consulta **[CONFIGURACION.md](CONFIGURACION.md)**.
 
+### Borrar una empresa definitivamente (Servidor)
+
+Para eliminar una empresa y **todo** lo que depende de ella (su base de datos propia, usuarios, roles, suscripciones,
+credenciales guardadas y notificaciones) y poder volver a crearla con el mismo slug, usa el borrado definitivo. Solo lo
+puede hacer el operador de plataforma y **no se puede deshacer**; para evitar accidentes hay que repetir el slug exacto
+de la empresa:
+
+```bash
+curl -X DELETE "https://erp.midominio.pe/api/v1/tenants/<id-de-la-empresa>?confirmSlug=<slug>" \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+El `TOKEN` es el del operador (ver "Alta de empresas por API"); el `<id>` aparece en la lista de empresas
+(`GET /api/v1/tenants`). La respuesta indica si se borró la base y cuántas filas se eliminaron de cada tabla.
+
+- No existe en la edición Lite (tiene una sola empresa).
+- Si no se puede conectar al servidor de bases para borrar la base de la empresa, **no se borra nada** y puedes reintentar.
+- **No se borran los archivos subidos** (PDF, fotos) que ya estén en disco o en MinIO: quedan huérfanos y no se vuelven a
+  leer. Si usas Keycloak, tampoco se eliminan las cuentas en Keycloak.
+- Si prefieres conservar los datos, usa "suspender" o "cancelar" en lugar de borrar.
+
 ## Pasar de Lite a Servidor
 
 Tus datos viajan con una copia de seguridad: no se pierde nada.
