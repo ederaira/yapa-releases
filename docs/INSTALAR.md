@@ -151,6 +151,13 @@ unzip -o -j yapa-docker-<versión>.zip 'yapa-docker/docker-compose.yml' 'yapa-do
 chmod +x yapa.sh seed-demo.sh && ./yapa.sh update
 ```
 
+**Al crear un usuario de una empresa nueva da 500 (`El tenant '…' no está registrado o su base todavía se está
+migrando`).** La base de esa empresa no se llegó a crear. En el log (`./yapa.sh logs`) aparece
+`Failed to provision DB … The connection attempt failed`. Pasaba en la edición Servidor con versiones anteriores a
+`0.1.4`, que daban de alta la empresa apuntando a un servidor de bases inexistente (`pg-tenants`). Actualiza a `0.1.4` o
+superior (ver arriba cómo reemplazar `docker-compose.yml`) y da de alta la empresa de nuevo con otro nombre corto (slug);
+la que falló no se reintenta sola.
+
 **Quiero pasar de Lite a Servidor.** No cambies el `.env` a mano: usa el respaldo, ver
 [EDICIONES.md](EDICIONES.md#pasar-de-lite-a-servidor).
 
