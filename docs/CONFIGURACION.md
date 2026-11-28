@@ -81,6 +81,8 @@ Keycloak). Un usuario se bloquea 15 minutos tras 5 intentos fallidos.
 | `YAPA_CORS_ALLOWED_ORIGINS` | Orígenes (separados por coma) desde los que se abre un panel: con dominio y HTTPS, el principal **y** el del operador (`https://erp.midominio.pe,https://admin.midominio.pe`). Si falta, el login responde 403 `Invalid CORS request`. Vacío = solo mismo origen | — |
 | `SELF_URL` | Dirección con la que yapa se llama a sí misma | `http://localhost:8080` |
 | `YAPA_PLATFORM_WEB_DIR` | Carpeta del panel del operador compilado. La imagen Docker ya lo trae (`/app/platform-web`) y lo sirve bajo `/_platform/` | — |
+| `YAPA_UPDATE_CHECK` | `true` = el panel del operador consulta GitHub (una petición pública, sin datos de tu instalación) para avisar de una versión nueva. `false` = nunca consulta ni avisa | `true` |
+| `YAPA_UPDATE_REPO` | Repositorio público donde se buscan las versiones | `ederaira/yapa-releases` |
 
 ### Panel del operador en un dominio propio (edición Servidor)
 

@@ -122,7 +122,7 @@ No ejecutes `yapa.sh` desde PowerShell o CMD: es un script de bash y debe correr
 ./yapa.sh credentials            # ver de nuevo usuarios y contraseñas
 ./yapa.sh backup                 # respaldo de la base de datos y los archivos
 ./yapa.sh restore backups/<carpeta>
-./yapa.sh update                 # actualizar a la última versión
+./yapa.sh update                 # actualizar a la última versión (con respaldo y vuelta atrás automática)
 ./yapa.sh admin-panel            # (Servidor) publicar el panel del operador en admin.<tu-dominio>
 ./yapa.sh stop | start | restart
 ```
@@ -142,14 +142,34 @@ YAPA_CORS_ALLOWED_ORIGINS=https://erp.midominio.pe,https://admin.midominio.pe
 **Cambié el `.env` y no se nota.** `./yapa.sh restart` **no** relee el `.env`. Después de cambiarlo usa
 `./yapa.sh start`, que recrea los contenedores cambiados.
 
-**`./yapa.sh update` no trae algo que cambió en la versión.** `update` solo actualiza la imagen, no
-`docker-compose.yml`, `Caddyfile` ni `yapa.sh`. Si una versión cambia esos archivos (lo dirá en sus notas),
-reemplázalos con los del `.zip` nuevo y luego ejecuta `./yapa.sh update`:
+**¿Cómo me entero de que hay una versión nueva?** En la edición Servidor, el panel del operador muestra un aviso con
+la versión nueva, el comando para actualizar (con botón de copiar) y un enlace a las novedades; se puede descartar hasta la
+siguiente versión. Se puede apagar con `YAPA_UPDATE_CHECK=false`. Desde la terminal: `./yapa.sh update --check`.
+
+**¿Cómo actualizo?** Con un solo comando, dentro de la carpeta de yapa:
 
 ```bash
-unzip -o -j yapa-docker-<versión>.zip 'yapa-docker/docker-compose.yml' 'yapa-docker/Caddyfile' 'yapa-docker/yapa.sh' 'yapa-docker/seed-demo.sh' -d .
-chmod +x yapa.sh seed-demo.sh && ./yapa.sh update
+./yapa.sh update              # instala la última versión
+./yapa.sh update --check      # solo avisa si hay una versión nueva
+./yapa.sh update --version 0.1.5     # una versión concreta
 ```
+
+El comando descarga el `.zip` de la versión, **verifica su suma SHA-256**, hace un **respaldo previo** (`backups/`),
+reemplaza `docker-compose.yml`, `Caddyfile`, `yapa.sh` y `seed-demo.sh` (tu `.env` y `conf.d` no se tocan), baja la imagen
+y espera a que yapa arranque. **Si no arranca, vuelve solo a la versión anterior** (los archivos viejos quedan en
+`.update-backup/<versión>/`). Opciones: `--no-backup` (sin respaldo previo) y `--yes` (sin preguntar).
+Limitación: las migraciones de la base solo avanzan; si la versión nueva ya migró y falla, restaura el respaldo con
+`./yapa.sh restore backups/<carpeta>`.
+
+> **Una sola vez, si vienes de la `0.1.3` o anterior:** su `update` solo baja la imagen. Reemplaza primero `yapa.sh` por
+> el de la versión nueva y desde entonces `update` se encarga de todo:
+>
+> ```bash
+> VER=$(curl -s https://api.github.com/repos/ederaira/yapa-releases/releases/latest | grep -oP '"tag_name": "v\K[^"]+')
+> curl -LO https://github.com/ederaira/yapa-releases/releases/download/v$VER/yapa-docker-$VER.zip
+> unzip -o -j yapa-docker-$VER.zip 'yapa-docker/yapa.sh' -d . && chmod +x yapa.sh
+> ./yapa.sh update
+> ```
 
 **Al crear un usuario de una empresa nueva da 500 (`El tenant '…' no está registrado o su base todavía se está
 migrando`).** La base de esa empresa no se llegó a crear. En el log (`./yapa.sh logs`) aparece
